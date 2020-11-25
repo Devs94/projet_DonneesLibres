@@ -134,6 +134,7 @@ void testSelectLignes() {
  * - la meilleure année pour ce prénom pour les garçons et filles
  **/
 int main() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction main non implantée ligne 134");
+    testAfficheTableau();
+    
+    return 0;
 }

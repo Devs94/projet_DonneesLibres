@@ -24,9 +24,7 @@ vector<int> litTableauAnnee(string nom_fichier) {
     /* Rappel :
     on traite les données sur les années : 2010, 2011, 2012, 2013, 2014, 2015 */
     
-    
     int annee, nombre;
-    int total_une_annee = 0;
     string jour;
     //Tableau contenant le nombre total de mariages associé à chaque année
     vector<int> mariages_par_annee;
@@ -34,19 +32,19 @@ vector<int> litTableauAnnee(string nom_fichier) {
     mariages_par_annee = vector<int>(6);
     
     
-    fichier.open("donnnees/statistiques-des-jours-des-mariages.txt");
+    fichier.open(nom_fichier);
+    
     while (fichier >> annee >> jour >> nombre) {
+        //On parcoure le tableau => année en année
         for (int i = 0; i < mariages_par_annee.size(); i++) {
-            if (annee == 2010 + i) {
-                total_une_annee += nombre;
+            if (annee - 2010 == i) {
+                mariages_par_annee[i] += nombre;
             }
-            mariages_par_annee[annee - i] = total_une_annee;
-            total_une_annee = 0;
-            
         }
     }
     
     fichier.close();
+    cout << endl;
     return mariages_par_annee;
 }
 
@@ -87,8 +85,26 @@ void testIndiceJour() {
  * case d'indice i, on trouve le nombre total de mariages célébrés le jour i
  **/
 vector<int> litTableauJours(string nom_fichier) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction litTableauJours non implantée ligne 65");
+    int annee, nombre;
+    string jour;
+    vector<int> mariages_jour;
+    mariages_jour = vector<int>(7);
+    
+    fichier.open(nom_fichier);
+    
+    while (fichier >> annee >> jour >> nombre) {
+        for (int i = 0; i < mariages_jour.size(); i++) {
+            if (indiceJour(jour) == i) {
+                mariages_jour[i] += nombre;
+            }
+        }
+    }
+    
+    fichier.close();
+    
+    return mariages_jour;
+    
+    
 }
 
 /** Test de la fonction litTableauJours **/
@@ -104,8 +120,12 @@ void testLitTableauJours() {
  * @return la somme des valeurs du tableau
  **/
 int somme(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction somme non implantée ligne 82");
+    int total = 0;
+    for (int x: t) {
+        total += x;
+    }
+    
+    return total;
 }
 
 /** Test de la fonction somme **/
@@ -121,8 +141,7 @@ void testSomme() {
  * (on arrondit à l'entier inférieur)
  **/
 int moyenne(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction moyenne non implantée ligne 99");
+    return somme(t)/t.size();
 }
 
 /** Test de la fonction moyenne **/
@@ -138,8 +157,18 @@ void testMoyenne() {
  * @return l'indice de la valeur maximale ou -1 si le tableau est vide
  **/
 int indiceMax(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction indiceMax non implantée ligne 116");
+    if (t.size() == 0) {
+        return -1;
+    }
+    
+    int i_max = 0;
+    for (int i = 1; i < t.size(); i++) {
+        if (t[i_max] < t[i]) {
+            i_max = i;
+        }
+    }
+    
+    return i_max;
 }
 
 /** Test de la fonction IndiceMax **/
@@ -159,6 +188,29 @@ void testIndiceMax() {
  * - le pourcentage de mariages célébrés un samedi
  **/
 int main() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction main non implantée ligne 137");
+    testLitTableauAnnee();
+    testLitTableauJours();
+    testSomme();
+    testMoyenne();
+    testIndiceMax();
+    
+    vector<int> tableau_annees = litTableauAnnee("donnees/statistiques-des-jours-des-mariages.txt");
+    vector<int> tableau_jours = litTableauJours("donnees/statistiques-des-jours-des-mariages.txt");
+    
+    int total_mariages = somme(tableau_annees);
+    int moyenne_mariages = total_mariages / tableau_annees.size();
+    int annee_mariages_max = indiceMax(tableau_annees) ;
+    int nombre_annee_mariages_max = tableau_annees[annee_mariages_max];
+    int jour_mariages_max = indiceMax(tableau_jours);
+    int nombre_jour_mariages_max = tableau_jours[jour_mariages_max];
+    double nombre_samedi = tableau_jours[indiceJour("Samedi")];
+    float pourcentage_samedi = 100 * nombre_samedi / total_mariages;
+    
+    cout << "Le nombre de total de mariages célébrés entre 2010 et 2015 est de " << total_mariages << endl;
+    cout << "Le nombre de mariages célébrés en moyenne par an est de " << moyenne_mariages << endl;
+    cout << "L’année où l’on a célébré le plus de mariages est " << 2010 + annee_mariages_max << " avec " << nombre_annee_mariages_max << " mariages" << endl;
+    cout << "Le jour de la semaine où l’on a célébré le plus de mariages est le " << jours[jour_mariages_max] << " avec 31418 mariages" << endl;
+    cout << "Le pourcentage de mariages célébrés le samedi est de " << pourcentage_samedi << "%" << endl;
+    
+    return 0;
 }
