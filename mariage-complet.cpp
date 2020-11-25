@@ -11,6 +11,7 @@ using namespace std;
 
 vector<string> jours = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
 
+ifstream fichier;
 
 /** Construction du tableau des mariages par années
  * On suppose que le fichier contient sur chaque ligne une année entre 2010 et 2015
@@ -20,8 +21,33 @@ vector<string> jours = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Same
  * case d'indice i, on trouve le nombre total de mariages de l'année 2010+i
  **/
 vector<int> litTableauAnnee(string nom_fichier) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction litTableauAnnee non implantée ligne 24");
+    /* Rappel :
+    on traite les données sur les années : 2010, 2011, 2012, 2013, 2014, 2015 */
+    
+    
+    int annee, nombre;
+    int total_une_annee = 0;
+    string jour;
+    //Tableau contenant le nombre total de mariages associé à chaque année
+    vector<int> mariages_par_annee;
+    //Chaque annee sera associé à l'indice annee - 2010
+    mariages_par_annee = vector<int>(6);
+    
+    
+    fichier.open("donnnees/statistiques-des-jours-des-mariages.txt");
+    while (fichier >> annee >> jour >> nombre) {
+        for (int i = 0; i < mariages_par_annee.size(); i++) {
+            if (annee == 2010 + i) {
+                total_une_annee += nombre;
+            }
+            mariages_par_annee[annee - i] = total_une_annee;
+            total_une_annee = 0;
+            
+        }
+    }
+    
+    fichier.close();
+    return mariages_par_annee;
 }
 
 /** Test de la fonction litTableauAnnee **/

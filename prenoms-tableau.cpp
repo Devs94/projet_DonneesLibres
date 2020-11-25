@@ -21,8 +21,12 @@ vector<vector<string>> tableauTest = {
  * @param tableau un tableau à deux dimensions
  **/
 void afficheTableau(vector<vector<string>> tableau) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction afficheTableau non implantée ligne 25");
+    for (int i = 0; i < tableau.size(); i++) {
+        for (int j = 0; j < tableau[i].size(); i++) {
+            cout << tableau[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
 
 void testAfficheTableau() {
