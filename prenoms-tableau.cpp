@@ -80,8 +80,8 @@ void testLitTableau() {
  **/
 vector<string> colonne(vector<vector<string>> t, int i) {
     vector<string> j;
-    j = vector<string>(i);
-    for (int ligne = 0; ligne < t.size(); ligne++) {
+    j = vector<string>(t.size());
+    for (int ligne = 0; ligne < j.size(); ligne++) {
         j[ligne] = t[ligne][i];
     }
     
@@ -102,7 +102,7 @@ void testColonne() {
  **/
 vector<int> conversionInt(vector<string> t) {
     vector<int> resultat = vector<int>(t.size());
-    for(int i =0; i < t.size(); i++) {
+    for(int i = 0; i < t.size(); i++) {
         istringstream(t[i]) >> resultat[i];
     }
     return resultat;
@@ -115,20 +115,31 @@ void testConversionInt() {
 
 /** copier la fonction somme déjà écrite **/
 int somme(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction somme non implantée ligne 92");
+    int total = 0;
+    for (int x: t) {
+        total += x;
+    }
 }
 
 /** copier la fonction moyenne déjà écrite **/
 int moyenne(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction moyenne non implantée ligne 98");
+   return somme(t)/t.size();
 }
 
 /** copier la fonction indiceMax déjà écrite **/
 int indiceMax(vector<int> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction indiceMax non implantée ligne 104");
+    if (t.size() == 0) {
+        return -1;
+    }
+    
+    int i_max = 0;
+    for (int i = 1; i < t.size(); i++) {
+        if (t[i_max] < t[i]) {
+            i_max = i;
+        }
+    }
+    
+    return i_max;
 }
 
 /** Sélection des lignes d'un tableau de données
@@ -140,14 +151,22 @@ int indiceMax(vector<int> t) {
  *  que la colonne j ait la valeur correspondant au critère
  **/
 vector<vector<string>> selectLignes(vector<vector<string>> t, int j, string valeur) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction selectLignes non implantée ligne 117");
+    vector<vector<string>> tableau;
+    vector<string> col = colonne(t, j);
+    for (int i = 0; i < col.size(); i++) {
+        if (col[i] == valeur) {
+            tableau.push_back(t[i]);
+        }
+    }
+    return tableau;
 }
 
 /** Test de la fonction selectLignes **/
 void testSelectLignes() {
     ASSERT(selectLignes(tableauTest, 0, "M") == vector<vector<string>>({{ "M", "2011", "Bubulle", "3"}}));
-    ASSERT(selectLignes(tableauTest, 1, "2011") == vector<vector<string>>({{ "M", "2011", "Bubulle", "3"}, { "F", "2011", "Babouche", "7"}, { "F", "2011", "Ziboulette", "1"}}));
+    ASSERT(selectLignes(tableauTest, 1, "2011") == vector<vector<string>>({{ "M", "2011", "Bubulle", "3"},
+                                                                           { "F", "2011", "Babouche", "7"},
+                                                                           { "F", "2011", "Ziboulette", "1"}}));
 }
 
 /** Lance les tests de litTableau, selectLignes et colonne puis
@@ -159,10 +178,16 @@ void testSelectLignes() {
 int main() {
     //testAfficheTableau();
     testLitTableau();
-    vector<string> col_t_test = colonne(tableauTest, 0);
-    for (string x: col_t_test) {
-        cout << x << endl;
-    }
+    testColonne();
+    testConversionInt();
+    testSelectLignes();
+    
+    string prenom;
+    vector<vector<string>> tab_fichier = litTableau("donnees/liste_des_prenoms.txt", 4);
+    cout << "Entrez un prénom : ";
+    cin >> prenom;
+
+    cout << "Nombre total de naissances : " << somme(conversionInt(colonne(tab_fichier, 3))) << endl;
     
     return 0;
 }
