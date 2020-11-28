@@ -22,7 +22,7 @@ vector<vector<string>> tableauTest = {
  **/
 void afficheTableau(vector<vector<string>> tableau) {
     for (int i = 0; i < tableau.size(); i++) {
-        for (int j = 0; j < tableau[i].size(); i++) {
+        for (int j = 0; j < tableau[i].size(); j++) {
             cout << tableau[i][j] << " ";
         }
         cout << endl;
@@ -41,8 +41,26 @@ void testAfficheTableau() {
  * @return un tableau de chaines de caractères à deux dimensions
  **/
 vector<vector<string>> litTableau(string nom_fichier, int nb_colonnes) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction litTableau non implantée ligne 41");
+    string element;
+    vector<vector<string>> tableau_fichier;
+    ifstream fichier;
+    fichier.open(nom_fichier);
+    
+    while (fichier) {
+        for (int j = 0; j < nb_colonnes; j++) {
+            if (fichier >> element) {
+                if (j % nb_colonnes == 0) {
+                    tableau_fichier.push_back({});
+                }
+                tableau_fichier[tableau_fichier.size() - 1].push_back(element);
+            }
+            
+        }
+    }
+    
+    fichier.close();
+    
+    return tableau_fichier;
 }
 
 /** Test de la fonction litTableau **/
@@ -60,9 +78,14 @@ void testLitTableau() {
  * @param i un numéro de colonne
  * @return la colonne j, représentée par un vecteur de chaines de caractères
  **/
-vector<string> colonne(vector<vector<string>> t, int j) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction colonne non implantée ligne 61");
+vector<string> colonne(vector<vector<string>> t, int i) {
+    vector<string> j;
+    j = vector<string>(i);
+    for (int ligne = 0; ligne < t.size(); ligne++) {
+        j[ligne] = t[ligne][i];
+    }
+    
+    return j;
 }
 
 /** Test de la fonction colonne **/
@@ -134,7 +157,12 @@ void testSelectLignes() {
  * - la meilleure année pour ce prénom pour les garçons et filles
  **/
 int main() {
-    testAfficheTableau();
+    //testAfficheTableau();
+    testLitTableau();
+    vector<string> col_t_test = colonne(tableauTest, 0);
+    for (string x: col_t_test) {
+        cout << x << endl;
+    }
     
     return 0;
 }
