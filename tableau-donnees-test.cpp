@@ -26,13 +26,11 @@ void testMoyenne() {
 }
 
 void testSomme() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction testSomme non implantée ligne 30");
+    ASSERT( somme(c) == 15 );
 }
 
 void testIndiceMax() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction testIndiceMax non implantée ligne 35");
+    ASSERT( indiceMax(c) == 1 );
 }
 
 void testColonne() {

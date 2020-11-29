@@ -205,9 +205,9 @@ int main() {
         cout << "Le prénom " << prenom << " a été donné à " << somme(conversionInt(colonne(tab_prenom, 3))) << " filles entre 2004 et 2019" << endl;
     } else {
         cout << "Le prénom " << prenom << " a été donné à " << somme(conversionInt(colonne(tab_prenom_M, 3))) << " garçons entre 2004 et 2019" << endl;
-        cout << "Le prénom " << prenom << " a été donné à " << somme(conversionInt(colonne(tab_prenom_F, 3))) << " garçons entre 2004 et 2019" << endl;
+        cout << "Le prénom " << prenom << " a été donné à " << somme(conversionInt(colonne(tab_prenom_F, 3))) << " filles entre 2004 et 2019" << endl;
     }
-    cout << "L'année la plus forte est : " << annee_max << " avec " << prenom_enfants_max << " enfants" << endl;
+    cout << "L'année la plus forte est " << annee_max << " avec " << prenom_enfants_max << " enfants" << endl;
     
     
     return 0;
