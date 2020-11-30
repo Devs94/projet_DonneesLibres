@@ -23,8 +23,16 @@ vector<string> jours = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Same
  * case d'indice i, on trouve le nombre total de mariages de l'année 2010+i
  **/
 vector<int> creeTableauAnnee(vector<vector<string>> data) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction creeTableauAnnee non implantée ligne 27");
+    vector<int> tab_annees;
+    tab_annees = vector<int>(annees.size());
+    vector<vector<string>> data_annee_choisi;
+        
+    for (int i = 0; i < tab_annees.size(); i++) {
+        data_annee_choisi = selectLignes(data, 0, annees[i]);
+        tab_annees[i] += somme(conversionInt(colonne(data_annee_choisi, 2)));
+    }
+    
+    return tab_annees;
 }
 
 /** Test de la fonction CreeTableauAnnee **/
@@ -66,8 +74,17 @@ void testIndiceJour() {
  * case d'indice i, on trouve le nombre total de mariages célébrés le jour i
  **/
 vector<int> creeTableauJours(vector<vector<string>> data) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction creeTableauJours non implantée ligne 70");
+    vector<int> tab_jours;
+    tab_jours = vector<int>(jours.size());
+    vector<vector<string>> data_jour_choisi;
+    
+    for (int i = 0; i < tab_jours.size(); i++) {
+        data_jour_choisi = selectLignes(data, 1, jours[i]);
+        tab_jours[i] += somme(conversionInt(colonne(data_jour_choisi, 2)));
+    }
+    
+    
+    return tab_jours;
 }
 
 /** Test de la fonction litTableauJours **/
@@ -88,6 +105,21 @@ void testCreeTableauJours() {
  * - le pourcentage de mariages célébrés un samedi
  **/
 int main() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction main non implantée ligne 92");
+    testCreeTableauAnnee();
+    testCreeTableauJours();
+    vector<vector<string>> tableau_fichier = litTableau("donnees/statistiques-des-jours-des-mariages.txt", 3);
+    vector<int> annees_nbres = creeTableauAnnee(tableau_fichier);
+    int annee_max = indiceMax(annees_nbres);
+    vector<int> jours_nbres = creeTableauJours(tableau_fichier);
+    int jour_max = indiceMax(jours_nbres);
+    double prctg_samedi = 100.0 * jours_nbres[indiceJour("Samedi")]/somme(conversionInt(colonne(tableau_fichier, 2)));
+    
+    cout << "Le nombre total de mariages entre 2010 et 2015 est : " << somme(conversionInt(colonne(tableau_fichier, 2))) << endl;
+    cout << "Il y a en moyenne " << moyenne(conversionInt(colonne(tableau_fichier, 2))) << " mariages célébrés par an" << endl;
+    cout << "L'année où l'on a célébré le plus de mariages est " << annees[annee_max] << " avec " << annees_nbres[annee_max] << " mariages" << endl;
+    cout << "Le jour où on célèbre le plus de mariages est le " << jours[jour_max] << " avec " << jours_nbres[jour_max] << " mariages" << endl;
+    cout << "Le pourcentage de mariages célébrés un samedi est " << prctg_samedi << "%" << endl;
+    
+    
+    return 0;
 }

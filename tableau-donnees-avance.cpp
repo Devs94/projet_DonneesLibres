@@ -5,18 +5,33 @@
 #include "tableau-donnees-avance.h"
 
 int chercheIndice(vector<string> t, string valeur) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction chercheIndice non implantée ligne 9");
+    for (int i = 0; i < t.size(); i++) {
+        if (t[i] == valeur) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 vector<string> distinct(vector<vector<string>> data, int j) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction distinct non implantée ligne 14");
+    vector<string> tab_dist;
+    
+    for (int i = 0; i < data[i].size(); i++) {
+        if (chercheIndice(tab_dist, data[i][j]) == -1) {
+            tab_dist.push_back(data[i][j]);
+        }
+    }
+    
+    return tab_dist;
 }
 
 vector<double> conversionDouble(vector<string> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction conversionDouble non implantée ligne 19");
+    vector<double> resultat = vector<double>(t.size());
+    for (int i = 0; i < t.size(); i++) {
+        istringstream(t[i]) >> resultat[i];
+    }
+    
+    return resultat;
 }
 
 vector<int> groupByInt(vector<vector<string>> data, vector<string> valeurs, int j1, int j2) {
