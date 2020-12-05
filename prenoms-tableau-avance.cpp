@@ -17,6 +17,9 @@ using namespace std;
  * - le prénom masculin et le prénom féminin le plus populaire
  **/
 int main() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction main non implantée ligne 21");
+    vector<vector<string>> data = litTableau("donnees/liste_des_prenoms.txt", 4);
+    vector<int> naissances_M_F = groupBy(data, {"M", "F"}, 0, 3);
+     cout << "Naissances homme : " << naissances_M_F[0] << endl;
+    
+    return 0;
 }

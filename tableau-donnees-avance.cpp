@@ -35,25 +35,71 @@ vector<double> conversionDouble(vector<string> t) {
 }
 
 vector<int> groupByInt(vector<vector<string>> data, vector<string> valeurs, int j1, int j2) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction groupByInt non implantée ligne 24");
+    vector<int> tab_grp_int = vector<int>(valeurs.size());
+    int entier;
+    
+    for (int i = 0; i < valeurs.size(); i++) {
+        for (int ligne = 0; ligne < data.size(); ligne++) {
+            //j1 : colonne des critères
+            if (data[ligne][j1] == valeurs[i]) {
+                //j2 : colonne des valeurs à traiter
+                istringstream(data[ligne][j2]) >> entier;
+                tab_grp_int[i] += entier;
+            }
+        }
+    }
+    
+    
+    return tab_grp_int;
 }
 
 vector<double> groupByDouble(vector<vector<string>> data, vector<string> valeurs, int j1, int j2) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction groupByDouble non implantée ligne 29");
+vector<double> tab_grp_double = vector<double>(valeurs.size());
+    double dbl;
+    
+    for (int i = 0; i < valeurs.size(); i++) {
+        for (int ligne = 0; ligne < data.size(); ligne++) {
+            //j1 : colonne des critères
+            if (data[ligne][j1] == valeurs[i]) {
+                //j2 : colonne des valeurs à traiter
+                istringstream(data[ligne][j2]) >> dbl;
+                tab_grp_double[i] += dbl;
+            }
+        }
+    }
+    
+    
+    return tab_grp_double;
 }
 
 template<class T>
 vector<T> conversion(vector<string> t) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction conversion non implantée ligne 35");
+    vector<T> resultat = vector<T>(t.size());
+    for (int i = 0; i < t.size(); i++) {
+        istringstream(t[i]) >> resultat[i];
+    }
+    
+    return resultat;
 }
 
 template<class T>
 vector<T> groupBy(vector<vector<string>> data, vector<string> valeurs, int j1, int j2) {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction groupBy non implantée ligne 41");
+    vector<T> tab_grp_type = vector<T>(valeurs.size());
+    T type_val;
+    
+    for (int i = 0; i < valeurs.size(); i++) {
+        for (int ligne = 0; ligne < data.size(); ligne++) {
+            //j1 : colonne des critères
+            if (data[ligne][j1] == valeurs[i]) {
+                //j2 : colonne des valeurs à traiter
+                istringstream(data[ligne][j2]) >> type_val;
+                tab_grp_type[i] += type_val;
+            }
+        }
+    }
+    
+    
+    return tab_grp_type;
 }
 
 // Force l'instanciation des templates
