@@ -18,8 +18,8 @@ using namespace std;
  **/
 int main() {
     vector<vector<string>> data = litTableau("donnees/liste_des_prenoms.txt", 4);
-    vector<int> naissances_M_F = groupBy(data, {"M", "F"}, 0, 3);
-     cout << "Naissances homme : " << naissances_M_F[0] << endl;
+    vector<int> test = conversion({"1", "2"});
+    cout << test[1] << endl;
     
     return 0;
 }
