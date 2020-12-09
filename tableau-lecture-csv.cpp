@@ -11,7 +11,12 @@ vector<vector<string>> litTableauCSV(string nom_fichier, int nb_colonnes) {
     string ligne, element;
     vector<vector<string>> tableau2D;
     
-
+    while (getline(fichier, ligne)) {
+        tableau2D.push_back({});
+        for (int i = 0; i < (nb_colonnes - 1); i++) {
+            tableau2D[tableau2D.size() - 1].push_back(element);
+        }
+    }
 
     
     
